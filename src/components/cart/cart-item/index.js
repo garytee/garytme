@@ -26,7 +26,7 @@ const CartItem = ( {
 	 */
 	const handleQtyChange = ( event, cartKey, type ) => {
 
-		if ( process.browser ) {
+		if ( typeof window !== "undefined" ) {
 
 			event.stopPropagation();
 			let newQty;

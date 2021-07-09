@@ -1,7 +1,7 @@
 import React from "react"
 import Layout from "../../components/layout"
 import Page from "../../components/page"
-import SEO from "../../components/seo"
+import Seo from "../../components/seo"
 // import { getElementorCssLinksData, getElementorJsLinksData } from "../../utils/elementor";
 import { getElementorCssLinksData } from "../../utils/elementor"
 import { Helmet } from "react-helmet"
@@ -16,7 +16,7 @@ const FrontPage = ({ pageContext }) => {
 
   return (
     <Layout>
-      <SEO
+      <Seo
         title="Phoenix: Gatsby WordPress Theme"
         seo={pageContext?.page?.seo}
         uri={pageContext?.uri}
