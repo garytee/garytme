@@ -1,7 +1,7 @@
 import React from "react";
 import Layout from "../../components/layout";
 import Page from '../../components/page';
-import Seo from "../../components/seo"
+import SEO from "../../components/seo";
 // import { getElementorCssLinksData, getElementorJsLinksData } from "../../utils/elementor";
 import {
   getElementorCssLinksData,
@@ -18,33 +18,23 @@ const PageTemplate = ( { pageContext } ) => {
 	// const elementorJsLinksData = getElementorJsLinksData();
 
 	return (
-    <Layout>
-      <Seo
-        title="Phoenix: Gatsby WordPress Theme"
-        seo={pageContext?.page?.seo}
-        uri={pageContext?.uri}
-      />
-      <Helmet>
-        {hasElementorSupport &&
-          elementorCssLinksData.length &&
-          elementorCssLinksData.map(linkData => (
-            <link
-              key={linkData?.id}
-              rel="stylesheet"
-              id={linkData?.id}
-              href={linkData?.link}
-              media="all"
-            />
-          ))}
-        {/* {
+		<Layout>
+			<SEO title="Phoenix: Gatsby WordPress Theme" seo={pageContext?.page?.seo} uri={pageContext?.uri}/>
+			<Helmet>
+				{
+					hasElementorSupport && elementorCssLinksData.length && elementorCssLinksData.map( linkData => (
+						<link key={linkData?.id} rel='stylesheet' id={linkData?.id} href={linkData?.link} media='all' />
+					) )
+				}
+				{/* {
 					hasElementorSupport && elementorJsLinksData.length && elementorJsLinksData.map( linkData => (
 						<script key={linkData?.id} id={linkData?.id} src={linkData?.link} />
 					) )
 				} */}
-      </Helmet>
-      <BodyClassName className={pageContext?.bodyClasses} />
-      <Page data={pageContext} />
-    </Layout>
-  )
+			</Helmet>
+			<BodyClassName className={pageContext?.bodyClasses}/>
+			<Page data={ pageContext }/>
+		</Layout>
+	)
 };
 export default PageTemplate;
