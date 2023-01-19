@@ -65,3 +65,36 @@ export async function getPostsByPageNo(page: string) {
   return { data, headers: res.headers };
   // return data;
 }
+
+export async function getPageRevisions(id: number, headers: any) {
+  const res = await fetch(
+    `${BASE_URL}/wp-json/wp/v2/pages/${id}/revisions?per_page=100`,
+    {
+      method: 'GET',
+      headers: headers,
+    }
+  );
+  const data = await res.json();
+  return data;
+}
+
+export async function getPostRevisions(id: number, headers: any) {
+  const res = await fetch(
+    `${BASE_URL}/wp-json/wp/v2/posts/${id}/revisions?per_page=100`,
+    {
+      method: 'GET',
+      headers: headers,
+    }
+  );
+  const data = await res.json();
+  return data;
+}
+
+export async function getPostById(id: number, headers: any) {
+  const res = await fetch(`${BASE_URL}/wp-json/wp/v2/posts/${id}`, {
+    method: 'GET',
+    headers: headers,
+  });
+  const data = await res.json();
+  return data;
+}
