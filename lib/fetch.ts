@@ -26,7 +26,7 @@ export async function getHome() {
 
 export async function getPortfolio() {
   const res = await fetch(
-    `${BASE_URL}/wp-json/wp/v2/portfolio?acf_format=standard&per_page=40&orderby=menu_order&order=asc`
+    `${BASE_URL}/wp-json/wp/v2/portfolios?acf_format=standard&per_page=40&orderby=menu_order&order=asc`
   );
   const data = await res.json();
   return data;
@@ -66,35 +66,74 @@ export async function getPostsByPageNo(page: string) {
   // return data;
 }
 
-export async function getPageRevisions(id: number, headers: any) {
+export async function getPostPreview(
+  post_id: number,
+  revision_id: number,
+  token: string
+) {
   const res = await fetch(
-    `${BASE_URL}/wp-json/wp/v2/pages/${id}/revisions?per_page=100`,
+    `${BASE_URL}/wp-json/wp/v2/posts/${post_id}/revisions/${revision_id}`,
     {
       method: 'GET',
-      headers: headers,
+      headers: {
+        'Content-Type': 'application/json',
+        Cookie: `token=${token}`,
+      },
     }
   );
   const data = await res.json();
-  return data;
+  const cookies = res.headers.get('set-cookie');
+  return { data, cookies };
 }
 
-export async function getPostRevisions(id: number, headers: any) {
+export async function getPagePreview(
+  post_id: any,
+  revision_id: any,
+  token: any
+) {
+  const res = await fetch(
+    `${BASE_URL}/wp-json/wp/v2/pages/${post_id}/revisions/${revision_id}`,
+    {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        Cookie: `token=${token}`,
+      },
+    }
+  );
+  const data = await res.json();
+  const cookies = res.headers.get('set-cookie');
+  return { data, cookies };
+}
+
+export async function getPostRevisions(id: number, token: any) {
   const res = await fetch(
     `${BASE_URL}/wp-json/wp/v2/posts/${id}/revisions?per_page=100`,
     {
       method: 'GET',
-      headers: headers,
+      headers: {
+        'Content-Type': 'application/json',
+        Cookie: `token=${token}`,
+      },
     }
   );
   const data = await res.json();
-  return data;
+  const cookies = res.headers.get('set-cookie');
+  return { data, cookies };
 }
 
-export async function getPostById(id: number, headers: any) {
-  const res = await fetch(`${BASE_URL}/wp-json/wp/v2/posts/${id}`, {
-    method: 'GET',
-    headers: headers,
-  });
+export async function getPageRevisions(id: number, token: any) {
+  const res = await fetch(
+    `${BASE_URL}/wp-json/wp/v2/pages/${id}/revisions?per_page=100`,
+    {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        Cookie: `token=${token}`,
+      },
+    }
+  );
   const data = await res.json();
-  return data;
+  const cookies = res.headers.get('set-cookie');
+  return { data, cookies };
 }

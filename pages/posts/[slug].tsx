@@ -1,11 +1,11 @@
 import { GetStaticProps, GetStaticPaths } from 'next';
 import Layout from '../../src/components/Layouts/Layout';
-import { getPosts, getPostById } from '../../lib/fetch';
+import { getPosts, getPostPreview } from '../../lib/fetch';
 import { PostProps } from '../../src/models/PostProps';
 import { SeoProps } from '../../src/models/SeoProps';
 import SeoTemplate from '../../src/components/Templates/SeoTemplate';
 import PostTemplate from '../../src/components/Templates/PostTemplate';
-
+import { usePreviewModeExit } from '../../src/utils/auth-functions';
 export default function Post({
   postProps,
   seoProps,
@@ -13,6 +13,7 @@ export default function Post({
   postProps: PostProps;
   seoProps: SeoProps;
 }) {
+  usePreviewModeExit();
   return (
     <Layout>
       <SeoTemplate seoProps={seoProps} />
@@ -22,7 +23,7 @@ export default function Post({
 }
 export const getStaticPaths: GetStaticPaths = async () => {
   const data = await getPosts();
-  const paths = data.map(({ slug }: any) => ({
+  const paths = data.map(({ slug }: { slug: string }) => ({
     params: {
       slug: `${slug}`,
     },
@@ -33,45 +34,35 @@ export const getStaticPaths: GetStaticPaths = async () => {
     fallback: 'blocking',
   };
 };
-// export const getStaticProps: GetStaticProps = async ({ params }) => {
-
-export const getStaticProps: GetStaticProps = async (ctx) => {
+export const getStaticProps: GetStaticProps = async (ctx: any) => {
+  console.log('ctx', ctx);
   if (ctx.preview && ctx.previewData) {
-    const { id, headers }: any = ctx.previewData;
-
-    const {
-      data: { post: post },
-    } = await getPostById(id, { headers });
-
-    // return { props: post };
+    const data = await getPostPreview(
+      ctx.previewData.post_id,
+      ctx.previewData.revision_id,
+      ctx.previewData.token
+    );
     return {
       props: {
-        postProps: post,
-        // seoProps: getDataFromSlug.yoast_head_json,
+        postProps: data.data,
+        seoProps: {},
       },
-      revalidate: 1,
     };
   }
-
   if (!ctx.params || !ctx.params.slug) {
     return { notFound: true };
   }
-
-  // const {
-  //   data: { post: props },
-  // } = await getPostBySlug(ctx.params.slug);
-
-  //   return { props };
-  // };
-
   const data = await getPosts();
   const getDataFromSlug = data.find(
     (post: any) => post.slug == ctx.params?.slug
   );
+  if (!getDataFromSlug) {
+    return { notFound: true };
+  }
   return {
     props: {
       postProps: getDataFromSlug,
-      seoProps: getDataFromSlug.yoast_head_json,
+      seoProps: getDataFromSlug?.yoast_head_json || {},
     },
     revalidate: 1,
   };

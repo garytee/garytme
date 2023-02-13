@@ -18,7 +18,11 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <ThemeProvider attribute="class">
       <main
-        className={cx(railwayFont.className, 'bg-gray-100', 'dark:bg-gray-900')}
+        className={cx(
+          railwayFont.className,
+          'bg-gray-100',
+          'dark:bg-gray-900 transition duration-200 ease-in-out'
+        )}
       >
         <AnimatePresence mode="wait" initial={false}>
           <Component {...pageProps} key={router.asPath} />

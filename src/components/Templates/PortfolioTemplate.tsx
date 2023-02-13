@@ -50,9 +50,13 @@ const itemvariants = {
 };
 
 export default function PortfolioTemplate({
-  portfolioData,
+  portfolioWebsites,
+  portfolioMobileApps,
+  portfolioOpenSource,
 }: {
-  portfolioData: PortfolioProps[];
+  portfolioWebsites: PortfolioProps[];
+  portfolioMobileApps: PortfolioProps[];
+  portfolioOpenSource: PortfolioProps[];
 }) {
   const { theme } = useTheme();
   const [showModal, setShowModal] = useState<boolean>(false);
@@ -96,53 +100,183 @@ export default function PortfolioTemplate({
 
   return (
     <>
-      <h1 className="text-4xl font-bold text-center">Portfolio</h1>
-      <motion.ul
-        className="p-8 grid-flow-row gap-4 auto-rows-fr grid grid-cols-1 tablet:grid-cols-2 laptop:grid-cols-3 desktop:grid-cols-4 max-w-screen-desktop m-auto"
-        initial="initial"
-        animate="in"
-        exit="out"
-        variants={listvariants}
-      >
-        {portfolioData.map(
-          ({
-            id,
-            slug,
-            title: { rendered: title },
-            acf: { ...flexible_content },
-          }) => (
-            <motion.li
-              variants={itemvariants}
-              className="p-4 border-[1px] light:border-black dark:border-white"
-              whileHover={{
-                scale: 1.02,
-                transition: { duration: 0.2 },
-                cursor: 'pointer',
-                boxShadow:
-                  theme === 'dark'
-                    ? '0px 0px 10px rgba(255,255,255,0.4)'
-                    : '0px 0px 10px rgba(0,0,0,0.2)',
-              }}
-              whileTap={{ scale: 0.95 }}
-              key={id}
-              onClick={() =>
-                handleOpen({
-                  id,
-                  title: { rendered: title },
-                  slug,
-                  acf: {
-                    flexible_content: [...flexible_content.flexible_content],
-                  },
-                })
-              }
-            >
-              <div
-                dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(title) }}
-              />
-            </motion.li>
-          )
-        )}
-      </motion.ul>
+      <h1 className="text-4xl font-bold text-center p-8">Portfolio</h1>
+
+      {portfolioWebsites.length > 0 && (
+        <>
+          {/* <h2 className="text-2xl font-bold text-center">Websites</h2> */}
+          <h2 className="text-2xl font-bold max-w-screen-desktop m-auto px-8">
+            Websites
+          </h2>
+          <motion.ul
+            className="p-8 grid-flow-row gap-4 auto-rows-fr grid grid-cols-1 tablet:grid-cols-2 laptop:grid-cols-3 desktop:grid-cols-4 max-w-screen-desktop m-auto"
+            initial="initial"
+            animate="in"
+            exit="out"
+            variants={listvariants}
+          >
+            {portfolioWebsites.map(
+              ({
+                id,
+                slug,
+                title: { rendered: title },
+                acf: { ...flexible_content },
+              }) => (
+                <motion.li
+                  variants={itemvariants}
+                  className="p-4 border-[1px] light:border-black dark:border-white"
+                  whileHover={{
+                    scale: 1.02,
+                    transition: { duration: 0.2 },
+                    cursor: 'pointer',
+                    boxShadow:
+                      theme === 'dark'
+                        ? '0px 0px 10px rgba(255,255,255,0.4)'
+                        : '0px 0px 10px rgba(0,0,0,0.2)',
+                  }}
+                  whileTap={{ scale: 0.95 }}
+                  key={id}
+                  onClick={() =>
+                    handleOpen({
+                      id,
+                      title: { rendered: title },
+                      slug,
+                      acf: {
+                        flexible_content: [
+                          ...flexible_content.flexible_content,
+                        ],
+                      },
+                    })
+                  }
+                >
+                  <div
+                    dangerouslySetInnerHTML={{
+                      __html: DOMPurify.sanitize(title),
+                    }}
+                  />
+                </motion.li>
+              )
+            )}
+          </motion.ul>
+        </>
+      )}
+
+      {portfolioOpenSource.length > 0 && (
+        <>
+          <h2 className="text-2xl font-bold max-w-screen-desktop m-auto px-8">
+            Open Source Projects
+          </h2>
+          <motion.ul
+            className="p-8 grid-flow-row gap-4 auto-rows-fr grid grid-cols-1 tablet:grid-cols-2 laptop:grid-cols-3 desktop:grid-cols-4 max-w-screen-desktop m-auto"
+            initial="initial"
+            animate="in"
+            exit="out"
+            variants={listvariants}
+          >
+            {portfolioOpenSource.map(
+              ({
+                id,
+                slug,
+                title: { rendered: title },
+                acf: { ...flexible_content },
+              }) => (
+                <motion.li
+                  variants={itemvariants}
+                  className="p-4 border-[1px] light:border-black dark:border-white"
+                  whileHover={{
+                    scale: 1.02,
+                    transition: { duration: 0.2 },
+                    cursor: 'pointer',
+                    boxShadow:
+                      theme === 'dark'
+                        ? '0px 0px 10px rgba(255,255,255,0.4)'
+                        : '0px 0px 10px rgba(0,0,0,0.2)',
+                  }}
+                  whileTap={{ scale: 0.95 }}
+                  key={id}
+                  onClick={() =>
+                    handleOpen({
+                      id,
+                      title: { rendered: title },
+                      slug,
+                      acf: {
+                        flexible_content: [
+                          ...flexible_content.flexible_content,
+                        ],
+                      },
+                    })
+                  }
+                >
+                  <div
+                    dangerouslySetInnerHTML={{
+                      __html: DOMPurify.sanitize(title),
+                    }}
+                  />
+                </motion.li>
+              )
+            )}
+          </motion.ul>
+        </>
+      )}
+
+      {portfolioMobileApps.length > 0 && (
+        <>
+          <h2 className="text-2xl font-bold max-w-screen-desktop m-auto px-8">
+            Mobile Apps
+          </h2>
+          <motion.ul
+            className="p-8 grid-flow-row gap-4 auto-rows-fr grid grid-cols-1 tablet:grid-cols-2 laptop:grid-cols-3 desktop:grid-cols-4 max-w-screen-desktop m-auto"
+            initial="initial"
+            animate="in"
+            exit="out"
+            variants={listvariants}
+          >
+            {portfolioMobileApps.map(
+              ({
+                id,
+                slug,
+                title: { rendered: title },
+                acf: { ...flexible_content },
+              }) => (
+                <motion.li
+                  variants={itemvariants}
+                  className="p-4 border-[1px] light:border-black dark:border-white"
+                  whileHover={{
+                    scale: 1.02,
+                    transition: { duration: 0.2 },
+                    cursor: 'pointer',
+                    boxShadow:
+                      theme === 'dark'
+                        ? '0px 0px 10px rgba(255,255,255,0.4)'
+                        : '0px 0px 10px rgba(0,0,0,0.2)',
+                  }}
+                  whileTap={{ scale: 0.95 }}
+                  key={id}
+                  onClick={() =>
+                    handleOpen({
+                      id,
+                      title: { rendered: title },
+                      slug,
+                      acf: {
+                        flexible_content: [
+                          ...flexible_content.flexible_content,
+                        ],
+                      },
+                    })
+                  }
+                >
+                  <div
+                    dangerouslySetInnerHTML={{
+                      __html: DOMPurify.sanitize(title),
+                    }}
+                  />
+                </motion.li>
+              )
+            )}
+          </motion.ul>
+        </>
+      )}
+
       <Modal
         setShowModal={setShowModal}
         selectedPost={selectedPost}
