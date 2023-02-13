@@ -1,6 +1,7 @@
 import isEmpty from '../validator/isEmpty';
 import Router from 'next/router';
 import { parseCookies, destroyCookie } from 'nookies';
+import { useEffect } from 'react';
 
 /**
  * Check if user is logged in.
@@ -31,6 +32,19 @@ export const logoutUser = (urlToRedirect: any) => {
   // Set auth data value in localStorage to empty.
   destroyCookie(null, 'token');
 
-  // Redirect the user to the given url.
+  /** Redirect the user to the given url. */
   Router.push(urlToRedirect);
 };
+
+/**
+ * Exit preview mode.
+ */
+export const usePreviewModeExit = () => {
+  useEffect(() => {
+    fetch('/api/exit-preview', {
+      method: 'POST',
+    });
+  }, []);
+};
+
+export default usePreviewModeExit;

@@ -1,6 +1,6 @@
 import { GetStaticProps, GetStaticPaths } from 'next';
 import Layout from '../src/components/Layouts/Layout';
-import { getPages } from '../lib/fetch';
+import { getPages, getPagePreview } from '../lib/fetch';
 import React from 'react';
 import { PageProps } from '../src/models/PageProps';
 import { SeoProps } from '../src/models/SeoProps';
@@ -38,10 +38,24 @@ export const getStaticPaths: GetStaticPaths = async () => {
     fallback: 'blocking',
   };
 };
-export const getStaticProps: GetStaticProps = async ({ params }) => {
+export const getStaticProps: GetStaticProps = async (context: any) => {
+  if (context.preview && context.previewData) {
+    const data = await getPagePreview(
+      context.previewData.post_id,
+      context.previewData.revision_id,
+      context.previewData.token
+    );
+    return {
+      props: {
+        postProps: data.data,
+        seoProps: {},
+      },
+    };
+  }
+
   const data = await getPages();
-  const pageProps = data.find((page: any) => page.slug == params?.slug);
-  if (!pageProps || params?.slug == 'home') {
+  const pageProps = data.find((page: any) => page.slug == context.params?.slug);
+  if (!pageProps || context.params?.slug == 'home') {
     return {
       notFound: true,
     };

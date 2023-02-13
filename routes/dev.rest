@@ -1,0 +1,79 @@
+# # @setHost = https://example.com
+# # @host = {{setHost}}
+
+# CMD + SHIFT + P > REST Client: Switch Environment > garytme
+
+### GET ALL WP DATA
+GET {{base_url}}/wp-json/wp/v2/
+
+### GET ALL WP PAGES
+GET {{base_url}}/wp-json/wp/v2/pages
+
+### GET WP PAGE BY SLUG
+GET {{base_url}}/wp-json/wp/v2/pages?slug=home
+
+### GET ALL WP POSTS
+GET {{base_url}}/wp-json/wp/v2/posts
+
+### GET ALL WP PORTFOLIO
+GET {{base_url}}/wp-json/wp/v2/portfolio
+
+### GET ALL WP PORTFOLIO
+GET {{base_url}}/wp-json/wp/v2/portfolio?per_page=6&page=1
+
+### GET ALL WP PORTFOLIO
+GET {{base_url}}/wp-json/wp/v2/posts?acf_format=standard&per_page=6&orderby=menu_order&order=asc&page=2
+
+### GET WP POST BY SLUG
+GET {{base_url}}/wp-json/wp/v2/posts?slug=hello-world
+
+### GET USER JWT TOKEN
+POST {{base_url}}/wp-json/simple-jwt-login/v1/auth
+Content-Type: application/json
+
+  {
+    "username": "{{username}}",
+    "password": "{{password}}"
+  }
+
+
+### CHECK IF USER JWT TOKEN IS VALID
+POST {{base_url}}/wp-json/simple-jwt-login/v1/auth/validate
+Content-Type: application/json
+Cookie: token={{jwt}}
+
+### REFRESH USER JWT TOKEN
+POST {{base_url}}/wp-json/simple-jwt-login/v1/auth/refresh
+Content-Type: application/json
+Cookie: token={{jwt}}
+
+
+### GET USER DATA BY TOKEN
+GET {{base_url}}/wp-json/wp/v2/users/me
+Content-Type: application/json
+Cookie: token={{jwt}}
+
+
+### ADD NEW USER
+POST {{base_url}}/wp-json/wp/v2/users/
+Content-Type: application/json
+Cookie: token={{jwt}}
+
+  {
+    "username": "{{username}}",
+    "email": "{{email}}",
+    "password": "{{password}}"
+  }
+
+
+
+### GET POST REVISIONS
+GET {{base_url}}/wp-json/wp/v2/posts/{{post_id}}/revisions?per_page=100
+Content-Type: application/json
+Cookie: token={{jwt}}
+
+
+### GET SINGLE POST REVISION DATA
+GET {{base_url}}/wp-json/wp/v2/posts/{{post_id}}/revisions/{{revision_id}}
+Content-Type: application/json
+Cookie: token={{jwt}}

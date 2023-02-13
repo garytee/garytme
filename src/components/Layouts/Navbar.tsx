@@ -144,7 +144,7 @@ export default function Navbar() {
   return (
     <>
       {isSmall ? (
-        <div className="fixed z-10 inline-flex w-[100%] bg-gray-100 dark:bg-gray-900 laptop:hidden">
+        <div className="fixed z-10 inline-flex w-[100%] bg-gray-100 dark:bg-gray-900 laptop:hidden transition duration-200 ease-in-out">
           <div className="my-3 mx-8">
             <Link href="/">
               <Image
