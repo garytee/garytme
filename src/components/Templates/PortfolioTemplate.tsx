@@ -106,7 +106,7 @@ export default function PortfolioTemplate({
         <>
           {/* <h2 className="text-2xl font-bold text-center">Websites</h2> */}
           <h2 className="text-2xl font-bold max-w-screen-desktop m-auto px-8">
-            Websites
+            Web
           </h2>
           <motion.ul
             className="p-8 grid-flow-row gap-4 auto-rows-fr grid grid-cols-1 tablet:grid-cols-2 laptop:grid-cols-3 desktop:grid-cols-4 max-w-screen-desktop m-auto"
@@ -164,7 +164,7 @@ export default function PortfolioTemplate({
       {portfolioOpenSource.length > 0 && (
         <>
           <h2 className="text-2xl font-bold max-w-screen-desktop m-auto px-8">
-            Open Source Projects
+            Open Source
           </h2>
           <motion.ul
             className="p-8 grid-flow-row gap-4 auto-rows-fr grid grid-cols-1 tablet:grid-cols-2 laptop:grid-cols-3 desktop:grid-cols-4 max-w-screen-desktop m-auto"
@@ -222,7 +222,7 @@ export default function PortfolioTemplate({
       {portfolioMobileApps.length > 0 && (
         <>
           <h2 className="text-2xl font-bold max-w-screen-desktop m-auto px-8">
-            Mobile Apps
+            Mobile
           </h2>
           <motion.ul
             className="p-8 grid-flow-row gap-4 auto-rows-fr grid grid-cols-1 tablet:grid-cols-2 laptop:grid-cols-3 desktop:grid-cols-4 max-w-screen-desktop m-auto"

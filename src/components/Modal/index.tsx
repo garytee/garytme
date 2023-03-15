@@ -81,7 +81,7 @@ const Modal = ({
                                   >
                                     <button
                                       type="button"
-                                      className="inline-flex items-center text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+                                      className="inline-flex items-center mt-4 text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
                                     >
                                       {item.link_to_content.title}&nbsp;&nbsp;
                                       <FaExternalLinkAlt />
@@ -90,50 +90,50 @@ const Modal = ({
                                 </div>
                               );
                             }
-                            if (item.stack) {
-                              console.log(item.stack.length);
-                              return (
-                                <div key={uuidv4()}>
-                                  <div
-                                    className={
-                                      item.stack.length < 3
-                                        ? 'p-8 grid-flow-row gap-4 grid grid-cols-1 tablet:grid-cols-2 laptop:grid-cols-2 desktop:grid-cols-2'
-                                        : 'p-8 grid-flow-row gap-4 grid grid-cols-1 tablet:grid-cols-2 laptop:grid-cols-3'
-                                    }
-                                  >
-                                    {item.stack.map(
-                                      (
-                                        stackItem: PortfolioProps['acf']['flexible_content'][0]['stack'][0]
-                                      ) => {
-                                        return (
-                                          <div key={uuidv4()}>
-                                            <h2 className="p-4 border-[1px] light:border-black dark:border-white">
-                                              {stackItem.stack_type}
-                                            </h2>
-                                            {stackItem.stack_items.map(
-                                              (
-                                                stackItemItem: PortfolioProps['acf']['flexible_content'][0]['stack'][0]['stack_items'][0]
-                                              ) => {
-                                                return (
-                                                  <div
-                                                    key={uuidv4()}
-                                                    className="pt-2"
-                                                  >
-                                                    <h3>
-                                                      {stackItemItem.stack_item}
-                                                    </h3>
-                                                  </div>
-                                                );
-                                              }
-                                            )}
-                                          </div>
-                                        );
-                                      }
-                                    )}
-                                  </div>
-                                </div>
-                              );
-                            }
+                            // if (item.stack) {
+                            //   console.log(item.stack.length);
+                            //   return (
+                            //     <div key={uuidv4()}>
+                            //       <div
+                            //         className={
+                            //           item.stack.length < 3
+                            //             ? 'p-8 grid-flow-row gap-4 grid grid-cols-1 tablet:grid-cols-2 laptop:grid-cols-2 desktop:grid-cols-2'
+                            //             : 'p-8 grid-flow-row gap-4 grid grid-cols-1 tablet:grid-cols-2 laptop:grid-cols-3'
+                            //         }
+                            //       >
+                            //         {item.stack.map(
+                            //           (
+                            //             stackItem: PortfolioProps['acf']['flexible_content'][0]['stack'][0]
+                            //           ) => {
+                            //             return (
+                            //               <div key={uuidv4()}>
+                            //                 <h2 className="p-4 border-[1px] light:border-black dark:border-white">
+                            //                   {stackItem.stack_type}
+                            //                 </h2>
+                            //                 {stackItem.stack_items.map(
+                            //                   (
+                            //                     stackItemItem: PortfolioProps['acf']['flexible_content'][0]['stack'][0]['stack_items'][0]
+                            //                   ) => {
+                            //                     return (
+                            //                       <div
+                            //                         key={uuidv4()}
+                            //                         className="pt-2"
+                            //                       >
+                            //                         <h3>
+                            //                           {stackItemItem.stack_item}
+                            //                         </h3>
+                            //                       </div>
+                            //                     );
+                            //                   }
+                            //                 )}
+                            //               </div>
+                            //             );
+                            //           }
+                            //         )}
+                            //       </div>
+                            //     </div>
+                            //   );
+                            // }
                           }
                         )}
                         {/* close dialog */}
