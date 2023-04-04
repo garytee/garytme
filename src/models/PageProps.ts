@@ -35,7 +35,7 @@ export interface PageProps {
           {
             date: string;
             company: string;
-            position: string;
+            title: string;
             description: string;
           }
         ];

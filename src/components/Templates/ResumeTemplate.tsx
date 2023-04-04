@@ -54,12 +54,18 @@ export default function ResumeTemplate({
                   EXPERIENCE
                 </h1>
                 {experience.map(
-                  ({ date, company, position, description }, index) => (
+                  ({ date, company, title, description }, index) => (
                     <React.Fragment key={index}>
-                      <div className="mb-4 mt-4">
-                        <h5>{date}</h5>
-                        <h5>{company}</h5>
-                        <h5>{position}</h5>
+                      <div className="mb-6 mt-4">
+                        <div className="grid grid-cols-1 max-w-screen-desktop mb-2 laptop:grid-cols-2">
+                          <h5 className="order-1 laptop:order-2">
+                            <em>{date}</em>
+                          </h5>
+                          <h5 className="order-2 laptop:order-1">
+                            <strong className="text-xl">{company}</strong>
+                          </h5>
+                        </div>
+                        <h5 className=" text-lg mb-4">{title}</h5>
                         <div
                           dangerouslySetInnerHTML={{
                             __html: DOMPurify.sanitize(description),
