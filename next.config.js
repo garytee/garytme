@@ -3,6 +3,11 @@
 const path = require('path');
 
 const nextConfig = {
+  i18n: {
+    locales: ['en'],
+    defaultLocale: 'en',
+  },
+
   reactStrictMode: true,
   swcMinify: true,
 
