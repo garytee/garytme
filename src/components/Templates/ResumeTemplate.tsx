@@ -54,7 +54,10 @@ export default function ResumeTemplate({
                   EXPERIENCE
                 </h1>
                 {experience.map(
-                  ({ date, company, title, description }, index) => (
+                  (
+                    { date, company, title, description, bullet_points },
+                    index
+                  ) => (
                     <React.Fragment key={index}>
                       <div className="mb-6 mt-4">
                         <div className="grid grid-cols-1 max-w-screen-desktop mb-2 laptop:grid-cols-2">
@@ -66,11 +69,22 @@ export default function ResumeTemplate({
                           </h5>
                         </div>
                         <h5 className=" text-lg mb-4">{title}</h5>
-                        <div
+                        {/* <div
                           dangerouslySetInnerHTML={{
                             __html: DOMPurify.sanitize(description),
                           }}
-                        />
+                        /> */}
+                        {bullet_points && (
+                          <div className="mt-2">
+                            <ul className="list-disc mx-[15px]">
+                              {bullet_points.map(({ bullet_point }, index) => (
+                                <React.Fragment key={index}>
+                                  <li className="mb-[2px]">{bullet_point}</li>
+                                </React.Fragment>
+                              ))}
+                            </ul>
+                          </div>
+                        )}
                       </div>
                     </React.Fragment>
                   )

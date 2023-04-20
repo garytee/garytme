@@ -149,7 +149,8 @@ export default function PortfolioTemplate({
                     })
                   }
                 >
-                  <div
+                  <button
+                    aria-label={`open modal for ${title}`}
                     dangerouslySetInnerHTML={{
                       __html: DOMPurify.sanitize(title),
                     }}
@@ -207,7 +208,8 @@ export default function PortfolioTemplate({
                     })
                   }
                 >
-                  <div
+                  <button
+                    aria-label={`open modal for ${title}`}
                     dangerouslySetInnerHTML={{
                       __html: DOMPurify.sanitize(title),
                     }}
@@ -265,7 +267,8 @@ export default function PortfolioTemplate({
                     })
                   }
                 >
-                  <div
+                  <button
+                    aria-label={`open modal for ${title}`}
                     dangerouslySetInnerHTML={{
                       __html: DOMPurify.sanitize(title),
                     }}

@@ -37,6 +37,11 @@ export interface PageProps {
             company: string;
             title: string;
             description: string;
+            bullet_points: [
+              {
+                bullet_point: string;
+              }
+            ];
           }
         ];
       }
