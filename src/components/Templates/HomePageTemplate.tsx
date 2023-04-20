@@ -77,6 +77,7 @@ export default function HomePageTemplate({
                           alt={image.alt}
                           width={80}
                           height={80}
+                          priority
                         />
                       )}
 
@@ -84,7 +85,11 @@ export default function HomePageTemplate({
                         <div className="p-2 grid-flow-row gap-4 auto-rows-fr grid grid-cols-3 text-center m-auto text-2xl justify-items-center">
                           {links.map(({ icon, url, tooltip_text }, index) => (
                             <Tooltip text={tooltip_text} key={index}>
-                              <Link target={'_blank'} href={url}>
+                              <Link
+                                target={'_blank'}
+                                href={url}
+                                aria-label={tooltip_text}
+                              >
                                 <motion.div
                                   className="p-4 rounded-full border-[0px] light:border-black dark:border-white"
                                   whileHover={{

@@ -27,7 +27,11 @@ const Path = (props: any) => {
 };
 
 const MenuToggle = ({ toggle }: any) => (
-  <button className="fixed top-[24px] z-10 right-8" onClick={toggle}>
+  <button
+    className="fixed top-[24px] z-10 right-8"
+    aria-label="Menu"
+    onClick={toggle}
+  >
     <svg width="23" height="23" viewBox="0 0 23 23">
       <Path
         variants={{
