@@ -86,6 +86,7 @@ export default function PortfolioTemplate({
                   stack_item: '',
                 },
               ],
+              hidden: false,
             },
           ],
         },
