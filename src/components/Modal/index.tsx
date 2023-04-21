@@ -92,12 +92,15 @@ const Modal = ({
                               );
                             }
                             if (item.stack) {
-                              console.log(item.stack.length);
+                              const visibleStack = item.stack.filter(
+                                (item) => !item.hidden
+                              );
+                              const visibleStackLength = visibleStack.length;
                               return (
                                 <div key={uuidv4()}>
                                   <div
                                     className={
-                                      item.stack.length < 3
+                                      visibleStackLength < 3
                                         ? 'p-8 grid-flow-row gap-4 grid grid-cols-1 tablet:grid-cols-2 laptop:grid-cols-2 desktop:grid-cols-2'
                                         : 'p-8 grid-flow-row gap-4 grid grid-cols-1 tablet:grid-cols-2 laptop:grid-cols-3'
                                     }
@@ -106,29 +109,33 @@ const Modal = ({
                                       (
                                         stackItem: PortfolioProps['acf']['flexible_content'][0]['stack'][0]
                                       ) => {
-                                        return (
-                                          <div key={uuidv4()}>
-                                            <h2 className="p-4 border-[1px] light:border-black dark:border-white">
-                                              {stackItem.stack_type}
-                                            </h2>
-                                            {stackItem.stack_items.map(
-                                              (
-                                                stackItemItem: PortfolioProps['acf']['flexible_content'][0]['stack'][0]['stack_items'][0]
-                                              ) => {
-                                                return (
-                                                  <div
-                                                    key={uuidv4()}
-                                                    className="pt-2"
-                                                  >
-                                                    <h3>
-                                                      {stackItemItem.stack_item}
-                                                    </h3>
-                                                  </div>
-                                                );
-                                              }
-                                            )}
-                                          </div>
-                                        );
+                                        if (!stackItem.hidden) {
+                                          return (
+                                            <div key={uuidv4()}>
+                                              <h2 className="p-4 border-[1px] light:border-black dark:border-white">
+                                                {stackItem.stack_type}
+                                              </h2>
+                                              {stackItem.stack_items.map(
+                                                (
+                                                  stackItemItem: PortfolioProps['acf']['flexible_content'][0]['stack'][0]['stack_items'][0]
+                                                ) => {
+                                                  return (
+                                                    <div
+                                                      key={uuidv4()}
+                                                      className="pt-2"
+                                                    >
+                                                      <h3>
+                                                        {
+                                                          stackItemItem.stack_item
+                                                        }
+                                                      </h3>
+                                                    </div>
+                                                  );
+                                                }
+                                              )}
+                                            </div>
+                                          );
+                                        }
                                       }
                                     )}
                                   </div>
@@ -141,7 +148,6 @@ const Modal = ({
                         <button
                           aria-label="Close Modal"
                           type="button"
-                          // className="absolute top-0 right-0 m-2 inline-flex justify-center rounded-md border border-transparent shadow-sm focus:outline-none"
                           className="absolute top-0 right-0 m-2 inline-flex justify-center rounded-md border border-transparent shadow-sm focus:outline-visible"
                           ref={cancelButtonRef}
                           onClick={() => setShowModal(false)}
