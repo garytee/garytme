@@ -24,6 +24,7 @@ export interface PortfolioProps {
                 stack_item: string;
               }
             ];
+            hidden: boolean;
           }
         ];
       }
