@@ -114,10 +114,10 @@ const itemvariants: any = {
 };
 
 const navLinks = [
-  {
-    name: 'Resume',
-    path: '/resume',
-  },
+  // {
+  //   name: 'Resume',
+  //   path: '/resume',
+  // },
   {
     name: 'Portfolio',
     path: '/portfolio',

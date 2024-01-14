@@ -3,9 +3,6 @@
     "$shared": {},
     "garytme": {
       "base_url": "https://example.com",
-      "authorization": "Basic username:1234567890",
-      "content_type": "application/json",
-      "accesstoken": "123456789",
       "username": "user1",
       "password": "password",
       "email": "test@test.test"

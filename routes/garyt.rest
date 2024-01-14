@@ -3,6 +3,8 @@
 
 # CMD + SHIFT + P > REST Client: Switch Environment > garytme
 
+
+
 ### GET ALL WP DATA
 GET {{base_url}}/wp-json/wp/v2/
 
@@ -27,7 +29,8 @@ GET {{base_url}}/wp-json/wp/v2/posts?acf_format=standard&per_page=6&orderby=menu
 ### GET WP POST BY SLUG
 GET {{base_url}}/wp-json/wp/v2/posts?slug=hello-world
 
-### GET USER JWT TOKEN
+### Login
+# @name login
 POST {{base_url}}/wp-json/simple-jwt-login/v1/auth
 Content-Type: application/json
 
@@ -36,28 +39,30 @@ Content-Type: application/json
     "password": "{{password}}"
   }
 
+### GET USER DATA WITH TOKEN RECEIVED FROM LOGIN
+@access_token = {{login.response.body.data.jwt}}
 
 ### CHECK IF USER JWT TOKEN IS VALID
 POST {{base_url}}/wp-json/simple-jwt-login/v1/auth/validate
 Content-Type: application/json
-Cookie: token={{jwt}}
+Cookie: token={{access_token}}
 
 ### REFRESH USER JWT TOKEN
 POST {{base_url}}/wp-json/simple-jwt-login/v1/auth/refresh
 Content-Type: application/json
-Cookie: token={{jwt}}
+Cookie: token={{access_token}}
 
 
 ### GET USER DATA BY TOKEN
 GET {{base_url}}/wp-json/wp/v2/users/me
 Content-Type: application/json
-Cookie: token={{jwt}}
+Cookie: token={{access_token}}
 
 
 ### ADD NEW USER
 POST {{base_url}}/wp-json/wp/v2/users/
 Content-Type: application/json
-Cookie: token={{jwt}}
+Cookie: token={{access_token}}
 
   {
     "username": "{{username}}",
